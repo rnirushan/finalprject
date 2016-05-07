@@ -1,0 +1,15 @@
+package com.finalyearproject.tapeit;
+
+import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+
+import com.finalyearproject.tapeit.R;
+
+public class shopnow extends AppCompatActivity {
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_shopnow);
+    }
+}

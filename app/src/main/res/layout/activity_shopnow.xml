@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.example.miriam.tapeit.shopnow">
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true">
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageView10"
+            android:layout_gravity="center_horizontal|top"
+            android:layout_marginTop="40dp" />
+
+        <ImageView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageView3"
+            android:layout_gravity="left|center_vertical" />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="32dp"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="Choose one of the following categories to start shopping now"
+            android:id="@+id/textView6"
+            android:layout_gravity="left|top"
+            android:textSize="14dp"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton3"
+            android:layout_gravity="left|top"
+            android:background="@drawable/tops"
+            android:layout_marginTop="50dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton4"
+            android:layout_gravity="center_horizontal|top"
+            android:background="@drawable/tshirts"
+            android:layout_marginTop="50dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton5"
+            android:layout_gravity="right|top"
+            android:background="@drawable/dress"
+            android:layout_marginTop="50dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton6"
+            android:layout_gravity="left|center_vertical"
+            android:background="@drawable/pants"
+            android:layout_marginTop="10dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton7"
+            android:layout_gravity="center"
+            android:background="@drawable/shorts"
+            android:layout_marginTop="10dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton10"
+            android:layout_gravity="center_horizontal|bottom"
+            android:background="@drawable/swaeter"
+            android:layout_marginBottom="30dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton11"
+            android:layout_gravity="right|bottom"
+            android:background="@drawable/shoes"
+            android:layout_marginBottom="30dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton9"
+            android:layout_gravity="right|center_vertical"
+            android:background="@drawable/skirts"
+            android:layout_marginTop="10dp" />
+
+        <ImageButton
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:id="@+id/imageButton8"
+            android:layout_gravity="left|bottom"
+            android:background="@drawable/jackets"
+            android:layout_marginBottom="30dp" />
+
+    </FrameLayout>
+</RelativeLayout>
