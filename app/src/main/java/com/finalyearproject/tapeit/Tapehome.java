@@ -1,6 +1,7 @@
 package com.finalyearproject.tapeit;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.hardware.Sensor;
 import android.hardware.SensorEvent;
 import android.hardware.SensorEventListener;
@@ -64,6 +65,9 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
         this.btnMeasure = (Button) findViewById(R.id.btnMeasure);
         this.txtMeasure = (TextView) findViewById(R.id.txtMeasure);
         this.txtAlert = (TextView) findViewById(R.id.txtAlert);
+
+        this.txtMeasure.setTextSize(2, 60.0f);
+        this.txtMeasure.setText(distance + " cm");
     }
 
     private void bindComponantEvents() {
@@ -72,10 +76,12 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if (event.getAction() == 0) {
+                            btnMeasure.setBackgroundColor(Color.parseColor("#9affde07"));
                             logging = false;
                             handleStartAndStop();
                         } else {
                             if (event.getAction() == INCH) {
+                                btnMeasure.setBackgroundColor(Color.parseColor("#ffde07"));
                                 logging = true;
                                 handleStartAndStop();
                             }
@@ -100,6 +106,8 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
     }
 
     public void handleStartAndStop() {
+
+        this.distance = 0.0f;
         if (this.logging) {
             float conv = 1.0f;
             this.logging = false;
@@ -117,7 +125,6 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
             analyzeErrors();
             accuracyAlert();
             if (this.sem != 3) {
-                this.txtMeasure.setTextSize(2, 60.0f);
                 TextView textView;
                 Object[] objArr;
                 switch (this.set) {
@@ -125,7 +132,7 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
                         textView = this.txtMeasure;
                         objArr = new Object[INCH];
                         objArr[CM] = Float.valueOf((this.distance * conv) * 100.0f);
-                        textView.setText(String.format("%.1f", objArr) + " cm");
+                        textView.setText(String.format("%.1f cm", objArr));
                         return;
                     default:
                         return;
@@ -137,9 +144,8 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
         this.sem = CM;
         this.measure_errors = "";
         this.logging = true;
-        this.txtMeasure.setTextSize(2, 14.0f);
-//how to use message
-        this.txtMeasure.setText(getString(R.string.howto));
+
+        this.txtMeasure.setText(this.distance + " cm");
     }
 
     private void analyzeErrors() {
@@ -149,23 +155,23 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
             this.sem = 3;
             this.measure_errors = getString(R.string.lowspeed) + "\n\n" + this.measure_errors;
             Toast.makeText(getApplicationContext(), getString(R.string.lowspeed), Toast.LENGTH_LONG).show();
-            this.txtMeasure.setTextSize(2, 14.0f);
+            //this.txtMeasure.setTextSize(2, 14.0f);
 
-            this.txtMeasure.setText(getString(R.string.howto));
+            //this.txtMeasure.setText(getString(R.string.howto));
         } else if (((distanceTracker.errByte >> 7) & INCH) == INCH) {
             this.sem = 3;
             this.measure_errors = getString(R.string.starttooearly) + "\n\n" + this.measure_errors;
             Toast.makeText(getApplicationContext(), getString(R.string.starttooearly), Toast.LENGTH_LONG).show();
-            this.txtMeasure.setTextSize(2, 14.0f);
+            //this.txtMeasure.setTextSize(2, 14.0f);
 
-            this.txtMeasure.setText(getString(R.string.howto));
+            //this.txtMeasure.setText(getString(R.string.howto));
         } else if (((distanceTracker.errByte >> 6) & INCH) == INCH) {
             this.sem = 3;
             this.measure_errors = getString(R.string.stoptooearly) + "\n\n" + this.measure_errors;
             Toast.makeText(getApplicationContext(), getString(R.string.stoptooearly), Toast.LENGTH_LONG).show();
-            this.txtMeasure.setTextSize(2, 14.0f);
+            //this.txtMeasure.setTextSize(2, 14.0f);
 
-            this.txtMeasure.setText(getString(R.string.howto));
+            //this.txtMeasure.setText(getString(R.string.howto));
         } else if (((distanceTracker.errByte >> 2) & INCH) == INCH) {
             this.sem = 2;
             this.measure_errors = getString(R.string.toofastorvertical) + "\n\n" + this.measure_errors;
@@ -175,9 +181,9 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
             this.sem = 3;
             this.measure_errors = getString(R.string.highrotation) + "\n\n" + this.measure_errors;
             Toast.makeText(getApplicationContext(), getString(R.string.highrotation), Toast.LENGTH_LONG).show();
-            this.txtMeasure.setTextSize(2, 14.0f);
+            //this.txtMeasure.setTextSize(2, 14.0f);
 
-            this.txtMeasure.setText(getString(R.string.howto));
+            //this.txtMeasure.setText(getString(R.string.howto));
         } else if (((distanceTracker.errByte >> 3) & INCH) == INCH) {
             this.sem = 2;
             this.measure_errors = getString(R.string.highrotation) + "\n\n" + this.measure_errors;
