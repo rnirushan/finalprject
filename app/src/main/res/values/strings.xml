@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">TapeIT</string>
+    <string name="green">Green</string>
+    <string name="highrotation">high rotation</string>
+    <string name="howto">how to use it</string>
+    <string name="toofastorvertical">too fast or vertical</string>
+    <string name="stoptooearly">stop too early</string>
+    <string name="starttooearly">start too early</string>
+    <string name="lowspeed">low speed</string>
 </resources>
