@@ -12,6 +12,8 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.finalyearproject.controllers.UserController;
+import com.finalyearproject.dto.User;
 import com.finalyearproject.tapeit.R;
 
 public class Login extends AppCompatActivity {
@@ -74,14 +76,25 @@ public class Login extends AppCompatActivity {
         new android.os.Handler().postDelayed(
                 new Runnable() {
                     public void run() {
-                        // On complete call either onLoginSuccess or onLoginFailed
-                        onLoginSuccess();
-                        // onLoginFailed();
+
+                        if (validateUser()){
+                            onLoginSuccess();
+                        } else {
+                            onLoginFailed();
+                        }
+
                         progressDialog.dismiss();
                     }
                 }, 3000);
     }
 
+    public boolean validateUser(){
+        String email = _emailText.getText().toString();
+        String password = _passwordText.getText().toString();
+
+        UserController controller = new UserController(this);
+        return controller.validateUser(new User(null, email, password));
+    }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
