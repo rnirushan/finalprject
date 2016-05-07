@@ -145,7 +145,7 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
         this.measure_errors = "";
         this.logging = true;
 
-        this.txtMeasure.setText(this.distance + " cm");
+        this.txtMeasure.setText("--");
     }
 
     private void analyzeErrors() {
@@ -198,13 +198,16 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
             case 0:
                 break;
             case 1:
-                this.txtAlert.setText("High");
+                this.txtAlert.setTextColor(Color.parseColor("#07ff24"));
+                this.txtAlert.setText(getString(R.string.highaccuracy));
                 break;
             case 2:
-                this.txtAlert.setText("Medium");
+                this.txtAlert.setTextColor(Color.parseColor("#FFFF9807"));
+                this.txtAlert.setText(getString(R.string.mediumaccuracy));
                 break;
             case 3:
-                this.txtAlert.setText("Low");
+                this.txtAlert.setTextColor(Color.parseColor("#FFFF070B"));
+                this.txtAlert.setText(getString(R.string.lowaccuracy));
                 break;
             default:
                 break;
