@@ -18,17 +18,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "contactsManager";
+    private static final String DATABASE_NAME = "TapeIT";
 
     private static final String TABLE_USERS = "users";
 
     private static final String USER_KEY_ID = "id";
     private static final String USER_KEY_NAME = "name";
-    private static final String USER_KEY_USERNAME = "username";
-    private static final String USER_KEY_PASSWORD = "password";
-    private static final String USER_KEY_ADDRESS = "address";
-    private static final String USER_KEY_PH_NO = "phone_number";
     private static final String USER_KEY_EMAIL = "email";
+    private static final String USER_KEY_PASSWORD = "password";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -37,12 +34,11 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_CONTACTS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
+        String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
                 + USER_KEY_ID + " INTEGER PRIMARY KEY," + USER_KEY_NAME
-                + " TEXT," + USER_KEY_USERNAME + " TEXT," + USER_KEY_PASSWORD + " TEXT,"
-                + USER_KEY_ADDRESS + " TEXT,"+ USER_KEY_PH_NO + " TEXT"
-                + USER_KEY_EMAIL + " TEXT" + ")";
-        db.execSQL(CREATE_CONTACTS_TABLE);
+                + " TEXT," + USER_KEY_EMAIL + " TEXT," + USER_KEY_PASSWORD + " TEXT"
+                + ")";
+        db.execSQL(CREATE_USERS_TABLE);
     }
 
     // Upgrading database
@@ -64,11 +60,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(USER_KEY_NAME, user.getName());
-        values.put(USER_KEY_USERNAME, user.getUsername());
-        values.put(USER_KEY_PASSWORD, user.getPassword());
-        values.put(USER_KEY_ADDRESS, user.getAddress());
-        values.put(USER_KEY_PH_NO, user.getPhNo());
         values.put(USER_KEY_EMAIL, user.getEmail());
+        values.put(USER_KEY_PASSWORD, user.getPassword());
 
         // Inserting Row
         db.insert(TABLE_USERS, null, values);
@@ -79,15 +72,13 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_USERS, new String[] { USER_KEY_ID,
-                        USER_KEY_NAME, USER_KEY_USERNAME, USER_KEY_PASSWORD, USER_KEY_ADDRESS,
-                        USER_KEY_PH_NO, USER_KEY_EMAIL}, USER_KEY_ID + "=?",
+                        USER_KEY_NAME, USER_KEY_EMAIL, USER_KEY_PASSWORD}, USER_KEY_ID + "=?",
                 new String[] { String.valueOf(id) }, null, null, null, null);
         if (cursor != null)
             cursor.moveToFirst();
 
-        UserDto user = new UserDto(cursor.getString(1), cursor.getString(1),
-                cursor.getString(2), cursor.getString(2), cursor.getString(2),
-                cursor.getString(2));
+        UserDto user = new UserDto(cursor.getString(1), cursor.getString(2),
+                cursor.getString(3));
 
         return user;
     }
@@ -103,9 +94,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                UserDto user = new UserDto(cursor.getString(1), cursor.getString(1),
-                        cursor.getString(2), cursor.getString(2), cursor.getString(2),
-                        cursor.getString(2));
+                UserDto user = new UserDto(cursor.getString(1), cursor.getString(2),
+                        cursor.getString(3));
 
                 user.setId(Integer.parseInt(cursor.getString(0)));
 
@@ -121,12 +111,9 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         ContentValues values = new ContentValues();
         values.put(USER_KEY_NAME, user.getName());
-        values.put(USER_KEY_USERNAME, user.getUsername());
-        values.put(USER_KEY_PASSWORD, user.getPassword());
-        values.put(USER_KEY_ADDRESS, user.getAddress());
-        values.put(USER_KEY_PH_NO, user.getPhNo());
         values.put(USER_KEY_EMAIL, user.getEmail());
-
+        values.put(USER_KEY_PASSWORD, user.getPassword());
+        
         // updating row
         return db.update(TABLE_USERS, values, USER_KEY_ID + " = ?",
                 new String[] { String.valueOf(user.getId()) });

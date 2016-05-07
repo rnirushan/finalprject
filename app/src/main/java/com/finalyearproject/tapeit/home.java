@@ -10,7 +10,7 @@ import android.widget.ImageButton;
 import com.finalyearproject.tapeit.R;
 
 public class home extends AppCompatActivity {
-    DatabaseHelper conn;
+
     public ImageButton imgMeasureNow;
     public ImageButton imgShopNow;
     public Activity currentActivity;
@@ -19,7 +19,7 @@ public class home extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         currentActivity = this;
-        conn = new DatabaseHelper(this);
+
 
         this.initGuiComponant();
 
