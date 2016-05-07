@@ -1,15 +1,34 @@
 package com.finalyearproject.dto;
 
-public class UserDto {
+public class User {
     private int id;
     private String name;
     private String email;
     private String password;
 
-    public UserDto (String name, String email, String password){
+    public User(String name, String email, String password){
         this.name = name;
         this.password = password;
         this.email = email;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        User user = (User) o;
+
+        if (!email.equals(user.email)) return false;
+        return password.equals(user.password);
+
+    }
+
+    @Override
+    public int hashCode() {
+        int result = email.hashCode();
+        result = 31 * result + password.hashCode();
+        return result;
     }
 
     public String getName() {

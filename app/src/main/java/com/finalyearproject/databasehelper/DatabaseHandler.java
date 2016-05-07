@@ -9,7 +9,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.finalyearproject.dto.UserDto;
+import com.finalyearproject.dto.User;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
 
@@ -27,9 +27,15 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String USER_KEY_EMAIL = "email";
     private static final String USER_KEY_PASSWORD = "password";
 
+    public static DatabaseHandler databaseHandler;
+
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
+
+
+
+
 
     // Creating Tables
     @Override
@@ -55,7 +61,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
      * All CRUD(Create, Read, Update, Delete) Operations
      */
 
-    void addUser(UserDto user) {
+    public void addUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
@@ -68,7 +74,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
-    UserDto getUserDto(int id) {
+    public User getUserDto(int id) {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_USERS, new String[] { USER_KEY_ID,
@@ -77,14 +83,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor != null)
             cursor.moveToFirst();
 
-        UserDto user = new UserDto(cursor.getString(1), cursor.getString(2),
+        User user = new User(cursor.getString(1), cursor.getString(2),
                 cursor.getString(3));
 
         return user;
     }
 
-    public List<UserDto> getAllUsers() {
-        List<UserDto> userList = new ArrayList<UserDto>();
+    public List<User> getAllUsers() {
+        List<User> userList = new ArrayList<User>();
         // Select All Query
         String selectQuery = "SELECT  * FROM " + TABLE_USERS;
 
@@ -94,7 +100,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // looping through all rows and adding to list
         if (cursor.moveToFirst()) {
             do {
-                UserDto user = new UserDto(cursor.getString(1), cursor.getString(2),
+                User user = new User(cursor.getString(1), cursor.getString(2),
                         cursor.getString(3));
 
                 user.setId(Integer.parseInt(cursor.getString(0)));
@@ -106,20 +112,20 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return userList;
     }
 
-    public int updateUser(UserDto user) {
+    public int updateUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put(USER_KEY_NAME, user.getName());
         values.put(USER_KEY_EMAIL, user.getEmail());
         values.put(USER_KEY_PASSWORD, user.getPassword());
-        
+
         // updating row
         return db.update(TABLE_USERS, values, USER_KEY_ID + " = ?",
                 new String[] { String.valueOf(user.getId()) });
     }
 
-    public void deleteUser(UserDto user) {
+    public void deleteUser(User user) {
         SQLiteDatabase db = this.getWritableDatabase();
         db.delete(TABLE_USERS, USER_KEY_ID + " = ?",
                 new String[] { String.valueOf(user.getId()) });
