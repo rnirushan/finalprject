@@ -138,7 +138,7 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
         this.measure_errors = "";
         this.logging = true;
         this.txtMeasure.setTextSize(2, 14.0f);
-
+//how to use message
         this.txtMeasure.setText(getString(R.string.howto));
     }
 
