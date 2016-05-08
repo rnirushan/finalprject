@@ -39,5 +39,13 @@ public class home extends AppCompatActivity {
                 currentActivity.startActivity(myIntent);
             }
         });
+
+        imgShopNow.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent myIntent = new Intent(currentActivity, shopnow.class);
+                currentActivity.startActivity(myIntent);
+            }
+        });
     }
 }

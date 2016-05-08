@@ -43,7 +43,7 @@
         <ImageButton
             android:layout_width="110dp"
             android:layout_height="110dp"
-            android:id="@+id/imageButton3"
+            android:id="@+id/imgCat1"
             android:layout_gravity="left|top"
             android:background="@drawable/tops"
             android:layout_marginTop="50dp" />

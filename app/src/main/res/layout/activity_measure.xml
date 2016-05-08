@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.finalyearproject.tapeit.MeasureActivity">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMeasureDesTitle"
+        android:text="Description for Peplum"
+        android:textSize="20dp"
+        android:textColor="#1e016c"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtMeasureDesTitle"
+        android:layout_marginTop="20dp"
+        android:textSize="16dp"
+        android:text="Title"
+        android:id="@+id/txtMeasureTitleLbl"
+        android:textColor="#1e016c"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMeasureTitle"
+        android:layout_below="@+id/txtMeasureDesTitle"
+        android:layout_toRightOf="@+id/txtMeasureTitleLbl"
+        android:layout_marginTop="20dp"
+        android:layout_marginLeft="53dp"
+        android:textSize="16dp"
+        android:text="Peplum"
+        android:textColor="#07001a"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtMeasureTitle"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:text="Category"
+        android:id="@+id/txtMeasureCategoryLbl"
+        android:textColor="#1e016c"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/txtMeasureCategory"
+        android:layout_below="@+id/txtMeasureTitle"
+        android:layout_toRightOf="@+id/txtMeasureCategoryLbl"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="20dp"
+        android:textSize="16dp"
+        android:text="Tops"
+        android:textColor="#07001a"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txtMeasureCategoryLbl"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:text="Description"
+        android:id="@+id/txtMeasureDescriptionLbl"
+        android:textColor="#1e016c"
+        android:textStyle="bold"/>
+    
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/txtMeasureDescriptionLbl"
+        android:layout_marginTop="4dp"
+        android:id="@+id/scrlDesView">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="15dp"
+            android:text="Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf Description hi fdsfsdfsf "
+            android:id="@+id/txtMeasureDescription"
+            android:textColor="#07001a"/>
+    </ScrollView>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrlDesView"
+        android:layout_marginTop="10dp"
+        android:textSize="16dp"
+        android:text="Recommended Measurement"
+        android:id="@+id/txtlstViewMeasureLbl"
+        android:textColor="#1e016c"
+        android:textStyle="bold"/>
+
+    <ListView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/scrlDesView"
+        android:id="@+id/lstViewMeasure"
+        android:layout_marginTop="20dp"
+        ></ListView>
+
+</RelativeLayout>
