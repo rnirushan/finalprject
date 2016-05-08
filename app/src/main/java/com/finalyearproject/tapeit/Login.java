@@ -116,6 +116,8 @@ public class Login extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
+        Intent myIntent = new Intent(this, home.class);
+        this.startActivity(myIntent);
         finish();
     }
 
