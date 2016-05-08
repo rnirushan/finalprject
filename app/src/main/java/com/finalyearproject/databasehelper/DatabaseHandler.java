@@ -9,6 +9,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
+import com.finalyearproject.dto.Category;
+import com.finalyearproject.dto.Measurement;
+import com.finalyearproject.dto.SubCategory;
 import com.finalyearproject.dto.User;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
@@ -21,30 +24,62 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String DATABASE_NAME = "TapeIT";
 
     private static final String TABLE_USERS = "users";
+    private static final String TABLE_CATEGORIES = "categories";
+    private static final String TABLE_SUBCATEGORIES = "subcategories";
+    private static final String TABLE_MEASUREMENTS = "measurements";
 
     private static final String USER_KEY_ID = "id";
     private static final String USER_KEY_NAME = "name";
     private static final String USER_KEY_EMAIL = "email";
     private static final String USER_KEY_PASSWORD = "password";
 
-    public static DatabaseHandler databaseHandler;
+    private static final String CATEGORY_KEY_ID = "id";
+    private static final String CATEGORY_KEY_NAME = "categoryname";
+    private static final String CATEGORY_KEY_ICON_PATH = "iconpath";
+
+    private static final String SUBCATEGORY_KEY_ID = "id";
+    private static final String SUBCATEGORY_KEY_CATEGORY_ID = "categoryid";
+    private static final String SUBCATEGORY_KEY_TITLE = "title";
+    private static final String SUBCATEGORY_KEY_DESCRIPTION = "description";
+
+    private static final String MEASUREMENT_KEY_ID = "id";
+    private static final String MEASUREMENT_KEY_SUBCATEGORY_ID = "subcategoryid";
+    private static final String MEASUREMENT_KEY_TITLE = "title";
+    private static final String MEASUREMENT_KEY_VALUE = "value";
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-
-
-
-
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
+
         String CREATE_USERS_TABLE = "CREATE TABLE " + TABLE_USERS + "("
                 + USER_KEY_ID + " INTEGER PRIMARY KEY," + USER_KEY_NAME
                 + " TEXT," + USER_KEY_EMAIL + " TEXT," + USER_KEY_PASSWORD + " TEXT"
                 + ")";
+
+        String CREATE_CATEGORIES_TABLE = "CREATE TABLE " + TABLE_CATEGORIES + "("
+                + CATEGORY_KEY_ID + " INTEGER PRIMARY KEY," + CATEGORY_KEY_NAME
+                + " TEXT," + CATEGORY_KEY_ICON_PATH + " TEXT"
+                + ")";
+
+        String CREATE_SUBCATEGORIES_TABLE = "CREATE TABLE " + TABLE_SUBCATEGORIES + "("
+                + SUBCATEGORY_KEY_ID + " INTEGER PRIMARY KEY," + SUBCATEGORY_KEY_CATEGORY_ID
+                + " INTEGER," + SUBCATEGORY_KEY_TITLE + " TEXT," +
+                SUBCATEGORY_KEY_DESCRIPTION + " TEXT" + ")";
+
+        String CREATE_MEASUREMENTS_TABLE = "CREATE TABLE " + TABLE_MEASUREMENTS + "("
+                + MEASUREMENT_KEY_ID + " INTEGER PRIMARY KEY," + MEASUREMENT_KEY_SUBCATEGORY_ID
+                + " INTEGER," + MEASUREMENT_KEY_TITLE + " TEXT," +
+                MEASUREMENT_KEY_VALUE + " TEXT" + ")";
+
         db.execSQL(CREATE_USERS_TABLE);
+        db.execSQL(CREATE_CATEGORIES_TABLE);
+        db.execSQL(CREATE_SUBCATEGORIES_TABLE);
+        db.execSQL(CREATE_MEASUREMENTS_TABLE);
+
     }
 
     // Upgrading database
@@ -141,5 +176,135 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // return count
         return cursor.getCount();
     }
+
+    public void addCategory(Category category){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(CATEGORY_KEY_NAME, category.getName());
+        values.put(CATEGORY_KEY_ICON_PATH, category.getIconPath());
+
+        // Inserting Row
+        db.insert(TABLE_CATEGORIES, null, values);
+        db.close(); // Closing database connection
+    }
+
+    public List<Category> getCategories(){
+
+        List<Category> categoryList = new ArrayList<Category>();
+        // Select All Query
+        String selectQuery = "SELECT  * FROM " + TABLE_CATEGORIES;
+
+        SQLiteDatabase db = this.getWritableDatabase();
+        Cursor cursor = db.rawQuery(selectQuery, null);
+
+        // looping through all rows and adding to list
+        if (cursor.moveToFirst()) {
+            do {
+                Category category = new Category( cursor.getString(1),
+                        cursor.getString(2));
+
+                category.setId(Integer.parseInt(cursor.getString(0)));
+
+                categoryList.add(category);
+            } while (cursor.moveToNext());
+        }
+
+        return categoryList;
+    }
+
+    public void addSubCategories(SubCategory subCategory){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(SUBCATEGORY_KEY_CATEGORY_ID, subCategory.getCategoryId());
+        values.put(SUBCATEGORY_KEY_TITLE, subCategory.getTitle());
+        values.put(SUBCATEGORY_KEY_DESCRIPTION, subCategory.getDescription());
+
+        // Inserting Row
+        db.insert(TABLE_SUBCATEGORIES, null, values);
+        db.close(); // Closing database connection
+    }
+
+    public List<SubCategory> getSubCategories (int mainCategoryId){
+
+        List<SubCategory> subCategoryList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_SUBCATEGORIES, new String[] { SUBCATEGORY_KEY_ID,
+                SUBCATEGORY_KEY_CATEGORY_ID, SUBCATEGORY_KEY_TITLE,
+                SUBCATEGORY_KEY_DESCRIPTION}, SUBCATEGORY_KEY_CATEGORY_ID + "=?",
+                new String[] { String.valueOf(mainCategoryId) }, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                SubCategory subCategory = new SubCategory( Integer.parseInt(cursor.getString(1)),
+                        cursor.getString(2), cursor.getString(3));
+
+                subCategory.setId(Integer.parseInt(cursor.getString(0)));
+
+                subCategoryList.add(subCategory);
+            } while (cursor.moveToNext());
+        }
+
+        return subCategoryList;
+    }
+
+    public void addMeasurement(Measurement measurement){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(MEASUREMENT_KEY_SUBCATEGORY_ID, measurement.getSubcategoryId());
+        values.put(MEASUREMENT_KEY_TITLE, measurement.getTitle());
+        values.put(MEASUREMENT_KEY_VALUE, measurement.getValue());
+
+        // Inserting Row
+        db.insert(TABLE_MEASUREMENTS, null, values);
+        db.close(); // Closing database connection
+
+    }
+
+    public List<Measurement> getMeasurements(int subCategoryId){
+
+        List<Measurement> measurementList = new ArrayList<>();
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_MEASUREMENTS, new String[] { MEASUREMENT_KEY_ID,
+                        MEASUREMENT_KEY_SUBCATEGORY_ID, MEASUREMENT_KEY_TITLE,
+                        MEASUREMENT_KEY_VALUE}, MEASUREMENT_KEY_SUBCATEGORY_ID + "=?",
+                new String[] { String.valueOf(subCategoryId) }, null, null, null, null);
+
+        if (cursor.moveToFirst()) {
+            do {
+                Measurement measurement = new Measurement( Integer.parseInt(cursor.getString(1)),
+                        cursor.getString(2), cursor.getString(3));
+
+                measurement.setId(Integer.parseInt(cursor.getString(0)));
+
+                measurementList.add(measurement);
+            } while (cursor.moveToNext());
+        }
+
+        return measurementList;
+
+    }
+
+    public int updateMeasurement(Measurement measurement){
+
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(MEASUREMENT_KEY_VALUE, measurement.getValue());
+
+        // updating row
+        return db.update(TABLE_MEASUREMENTS, values, MEASUREMENT_KEY_ID + " = ?",
+                new String[] { String.valueOf(measurement.getId()) });
+
+    }
+
+
 
 }
