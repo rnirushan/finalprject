@@ -27,15 +27,15 @@ public class DBDataGenerator {
 
         //creating category objects
 
-        Category tops = new Category("Tops","drawable/tops");
-        Category tShirts = new Category("T-Shirts","drawable/tshirts");
-        Category dress = new Category("Dress","drawable/dress");
-        Category pants = new Category("Pants","drawable/pants");
-        Category shorts = new Category("Shorts","drawable/shorts");
-        Category skirts = new Category("Skirts","drawable/skirts");
-        Category jackets = new Category("Jackets","drawable/jackets");
-        Category swaeter = new Category("Swaeter","drawable/swaeter");
-        Category shoes = new Category("Shoes","drawable/shoes");
+        Category tops = new Category("Tops","tops");
+        Category tShirts = new Category("T-Shirts","tshirts");
+        Category dress = new Category("Dress","dress");
+        Category pants = new Category("Pants","pants");
+        Category shorts = new Category("Shorts","shorts");
+        Category skirts = new Category("Skirts","skirts");
+        Category jackets = new Category("Jackets","jackets");
+        Category swaeter = new Category("Swaeter","swaeter");
+        Category shoes = new Category("Shoes","shoes");
 
         List<Category> categoryList = new ArrayList<>();
         categoryList.add(tops);
@@ -57,6 +57,8 @@ public class DBDataGenerator {
     }
 
     public void generateSubCategories(){
+
+        //creating subcategories
 
         SubCategory peplum = new SubCategory(databaseHandler.getCategoryByName("Tops").getId(),
                 "Peplum","Peplum tops are an elegant structure that was originated in Greece. " +
@@ -86,15 +88,6 @@ public class DBDataGenerator {
         SubCategory openShoulder = new SubCategory(databaseHandler.getCategoryByName("Tops").getId(),
                 "Open Shoulder","");
 
-        databaseHandler.addSubCategories(peplum);
-        databaseHandler.addSubCategories(openCollar);
-        databaseHandler.addSubCategories(deepVNeck);
-        databaseHandler.addSubCategories(deepCircleNeck);
-        databaseHandler.addSubCategories(turtleNeck);
-        databaseHandler.addSubCategories(collaredNeck);
-        databaseHandler.addSubCategories(egyptianSideShoulder);
-        databaseHandler.addSubCategories(openShoulder);
-
         SubCategory vNeck = new SubCategory(databaseHandler.getCategoryByName("T-Shirts").getId(),
                 "V Neck","");
 
@@ -112,13 +105,6 @@ public class DBDataGenerator {
 
         SubCategory tankTops  = new SubCategory(databaseHandler.getCategoryByName("T-Shirts").getId(),
                 "Tank Tops","");
-
-        databaseHandler.addSubCategories(vNeck);
-        databaseHandler.addSubCategories(circleNeck);
-        databaseHandler.addSubCategories(longSleeve);
-        databaseHandler.addSubCategories(shortSleeve);
-        databaseHandler.addSubCategories(sleeveless);
-        databaseHandler.addSubCategories(tankTops);
 
         SubCategory skinnyPants = new SubCategory(databaseHandler.getCategoryByName("Pants").getId(),
                 "Skinny Pants","The skinny pants became famous in the 2005 onwards were fashion went" +
@@ -139,6 +125,25 @@ public class DBDataGenerator {
         SubCategory lowWaist = new SubCategory(databaseHandler.getCategoryByName("Pants").getId(),
                 "Low Waist","");
 
+
+        //database insertion
+
+        databaseHandler.addSubCategories(peplum);
+        databaseHandler.addSubCategories(openCollar);
+        databaseHandler.addSubCategories(deepVNeck);
+        databaseHandler.addSubCategories(deepCircleNeck);
+        databaseHandler.addSubCategories(turtleNeck);
+        databaseHandler.addSubCategories(collaredNeck);
+        databaseHandler.addSubCategories(egyptianSideShoulder);
+        databaseHandler.addSubCategories(openShoulder);
+
+        databaseHandler.addSubCategories(vNeck);
+        databaseHandler.addSubCategories(circleNeck);
+        databaseHandler.addSubCategories(longSleeve);
+        databaseHandler.addSubCategories(shortSleeve);
+        databaseHandler.addSubCategories(sleeveless);
+        databaseHandler.addSubCategories(tankTops);
+
         databaseHandler.addSubCategories(skinnyPants);
         databaseHandler.addSubCategories(denimPants);
         databaseHandler.addSubCategories(highWaist);
@@ -149,6 +154,8 @@ public class DBDataGenerator {
 
     public void generateMeasurements(){
 
+        //create recommended measurements
+
         Measurement peplumWaist = new Measurement(databaseHandler.getSubCategoryByName("Peplum").getId(),
                 "WAIST");
 
@@ -157,6 +164,8 @@ public class DBDataGenerator {
 
         Measurement skinnyPantLegLength = new Measurement(databaseHandler.getSubCategoryByName("Skinny Pants").getId(),
                 "LEG LENGTH ");
+
+        //database insertion
 
         databaseHandler.addMeasurement(peplumWaist);
         databaseHandler.addMeasurement(skinnyPantsWaist);
