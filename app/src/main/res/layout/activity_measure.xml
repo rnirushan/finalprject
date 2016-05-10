@@ -104,9 +104,9 @@
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/scrlDesView"
+        android:layout_below="@+id/txtlstViewMeasureLbl"
+        android:layout_marginTop="4dp"
         android:id="@+id/lstViewMeasure"
-        android:layout_marginTop="20dp"
         ></ListView>
 
 </RelativeLayout>
