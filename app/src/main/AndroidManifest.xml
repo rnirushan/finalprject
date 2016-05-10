@@ -26,7 +26,8 @@
         </activity>
         <activity android:name=".SignUpActivity" />
         <activity android:name=".SubCategoryActivity" />
-        <activity android:name=".MeasureActivity"></activity>
+        <activity android:name=".MeasureActivity" />
+        <activity android:name=".MeasurementActivity"></activity>
     </application>
 
 </manifest>

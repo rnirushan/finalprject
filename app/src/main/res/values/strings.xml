@@ -9,7 +9,7 @@
     <string name="lowspeed">low speed</string>
     <string name="highaccuracy">Accuracy : HIGH</string>
     <string name="mediumaccuracy">Accuracy : Medium</string>
-    <string name="lowaccuracy">Low : Accuracy</string>
+    <string name="lowaccuracy">Accuracy : LOW</string>
     <string name="title_activity_login">Sign in</string>
 
     <!-- Strings related to login -->
