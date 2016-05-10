@@ -18,7 +18,7 @@
 
         <TextView
             android:layout_width="match_parent"
-            android:layout_height="32dp"
+            android:layout_height="42dp"
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="Choose one of the following categories to start shopping now"
             android:id="@+id/textView6"
@@ -32,7 +32,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat1"
             android:layout_gravity="left|top"
-            android:background="@drawable/tops"
             android:layout_marginTop="50dp" />
 
         <ImageButton
@@ -40,7 +39,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat2"
             android:layout_gravity="center_horizontal|top"
-            android:background="@drawable/tshirts"
             android:layout_marginTop="50dp" />
 
         <ImageButton
@@ -48,7 +46,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat3"
             android:layout_gravity="right|top"
-            android:background="@drawable/dress"
             android:layout_marginTop="50dp" />
 
         <ImageButton
@@ -56,7 +53,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat4"
             android:layout_gravity="left|center_vertical"
-            android:background="@drawable/pants"
             android:layout_marginTop="10dp" />
 
         <ImageButton
@@ -64,7 +60,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat5"
             android:layout_gravity="center"
-            android:background="@drawable/shorts"
             android:layout_marginTop="10dp" />
 
         <ImageButton
@@ -72,7 +67,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat6"
             android:layout_gravity="center_horizontal|bottom"
-            android:background="@drawable/swaeter"
             android:layout_marginBottom="30dp" />
 
         <ImageButton
@@ -80,7 +74,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat7"
             android:layout_gravity="right|bottom"
-            android:background="@drawable/shoes"
             android:layout_marginBottom="30dp" />
 
         <ImageButton
@@ -88,7 +81,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat8"
             android:layout_gravity="right|center_vertical"
-            android:background="@drawable/skirts"
             android:layout_marginTop="10dp" />
 
         <ImageButton
@@ -96,7 +88,6 @@
             android:layout_height="110dp"
             android:id="@+id/imgCat9"
             android:layout_gravity="left|bottom"
-            android:background="@drawable/jackets"
             android:layout_marginBottom="30dp" />
 
     </FrameLayout>

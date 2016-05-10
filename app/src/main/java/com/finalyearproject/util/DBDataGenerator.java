@@ -15,11 +15,21 @@ public class DBDataGenerator {
 
     DatabaseHandler databaseHandler;
 
-    DBDataGenerator(Context context){
+    public DBDataGenerator(Context context){
         databaseHandler = new DatabaseHandler(context);
     }
 
     public void generateData(){
+        if(databaseHandler.getCategoryCount() == 0) {
+            generateCategories();
+        }
+        if(databaseHandler.getSubCategoryCount() == 0) {
+            generateSubCategories();
+        }
+        if(databaseHandler.getMeasurmentCount() == 0){
+            generateMeasurements();
+        }
+
 
     }
 

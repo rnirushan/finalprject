@@ -13,8 +13,11 @@ import com.finalyearproject.dto.Category;
 import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.dto.SubCategory;
 import com.finalyearproject.dto.User;
+import com.finalyearproject.util.DBDataGenerator;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
+
+    Context context;
 
     // All Static variables
     // Database Version
@@ -49,6 +52,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        this.context = context;
     }
 
     // Creating Tables
@@ -79,6 +83,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.execSQL(CREATE_CATEGORIES_TABLE);
         db.execSQL(CREATE_SUBCATEGORIES_TABLE);
         db.execSQL(CREATE_MEASUREMENTS_TABLE);
+
 
     }
 
@@ -171,10 +176,44 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         String countQuery = "SELECT  * FROM " + TABLE_USERS;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
         cursor.close();
 
         // return count
-        return cursor.getCount();
+        return count;
+    }
+
+    public int getCategoryCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_CATEGORIES;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return count;
+    }
+
+    public int getSubCategoryCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_SUBCATEGORIES;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return count;
+    }
+
+    public int getMeasurmentCount() {
+        String countQuery = "SELECT  * FROM " + TABLE_MEASUREMENTS;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(countQuery, null);
+        int count = cursor.getCount();
+        cursor.close();
+
+        // return count
+        return count;
     }
 
     public void addCategory(Category category){

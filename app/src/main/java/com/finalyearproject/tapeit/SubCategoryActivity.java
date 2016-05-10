@@ -10,6 +10,12 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
+import com.finalyearproject.controllers.ShopController;
+import com.finalyearproject.dto.SubCategory;
+
+import java.util.Arrays;
+import java.util.List;
+
 public class SubCategoryActivity extends AppCompatActivity {
     public Activity currentActivity;
     private ListView subCategoryLstView;
@@ -21,14 +27,26 @@ public class SubCategoryActivity extends AppCompatActivity {
 
         currentActivity = this;
 
-        this.initGuiComponant();
+        int categoryId = Integer.parseInt(getIntent().getStringExtra("categoryId"));
+        ShopController controller = new ShopController(this);
+        List<SubCategory> subCategoryList = controller.getSubCategories(categoryId);
+
+        this.initGuiComponant(subCategoryList);
 
         this.bindComponantEvents();
     }
 
-    private void initGuiComponant() {
-        String[] mobileArray = {"Android","IPhone","WindowsMobile","Blackberry","WebOS","Ubuntu","Windows7","Max OS X",
-                "Android","IPhone","WindowsMobile","Blackberry"};
+    private void initGuiComponant(List<SubCategory> subCategoryList) {
+
+        String[] mobileArray = new String[subCategoryList.size()];
+        int i = 0;
+
+        for(SubCategory subCategory:subCategoryList){
+
+            mobileArray[i] = subCategory.getTitle();
+            i++;
+
+        }
 
         ArrayAdapter adapter = new ArrayAdapter<String>(this, android.R.layout.simple_list_item_1, mobileArray);
 

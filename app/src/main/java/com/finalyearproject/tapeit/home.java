@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
+import com.finalyearproject.util.DBDataGenerator;
+
 public class home extends AppCompatActivity {
 
     public ImageButton imgMeasureNow;
@@ -22,6 +24,10 @@ public class home extends AppCompatActivity {
         this.initGuiComponant();
 
         this.bindComponantEvents();
+
+        DBDataGenerator dbDataGenerator = new DBDataGenerator(this);
+        dbDataGenerator.generateData();
+
     }
 
     private void initGuiComponant() {
