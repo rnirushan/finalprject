@@ -18,6 +18,13 @@ public class Measurement {
 
     }
 
+    public Measurement(int subcategoryId, String title){
+
+        this.subcategoryId = subcategoryId;
+        this.title =title;
+
+    }
+
     public int getId() {
         return id;
     }

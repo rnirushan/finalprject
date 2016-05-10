@@ -189,6 +189,26 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         db.close(); // Closing database connection
     }
 
+    public Category getCategoryByName(String name){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_CATEGORIES, new String[] { CATEGORY_KEY_ID,
+                        CATEGORY_KEY_NAME, CATEGORY_KEY_ICON_PATH},
+                CATEGORY_KEY_NAME + "=?",
+                new String[] { String.valueOf(name) }, null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        Category category = new Category(cursor.getString(1), cursor.getString(2));
+        category.setId(Integer.parseInt(cursor.getString(0)));
+
+        return category;
+
+
+    }
+
     public List<Category> getCategories(){
 
         List<Category> categoryList = new ArrayList<Category>();
@@ -224,6 +244,28 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         // Inserting Row
         db.insert(TABLE_SUBCATEGORIES, null, values);
         db.close(); // Closing database connection
+    }
+
+    public SubCategory getSubCategoryByName(String name){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_SUBCATEGORIES, new String[] { SUBCATEGORY_KEY_ID,
+                        SUBCATEGORY_KEY_CATEGORY_ID, SUBCATEGORY_KEY_TITLE,
+                        SUBCATEGORY_KEY_DESCRIPTION},
+                SUBCATEGORY_KEY_TITLE + "=?",
+                new String[] { String.valueOf(name) }, null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        SubCategory subCategory = new SubCategory(Integer.parseInt(cursor.getString(1)),
+                cursor.getString(2),cursor.getString(3));
+        subCategory.setId(Integer.parseInt(cursor.getString(0)));
+
+        return subCategory;
+
+
     }
 
     public List<SubCategory> getSubCategories (int mainCategoryId){
