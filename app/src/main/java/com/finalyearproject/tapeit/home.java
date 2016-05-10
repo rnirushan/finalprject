@@ -7,8 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.ImageButton;
 
-import com.finalyearproject.tapeit.R;
-
 public class home extends AppCompatActivity {
 
     public ImageButton imgMeasureNow;
@@ -43,7 +41,7 @@ public class home extends AppCompatActivity {
         imgShopNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(currentActivity, shopnow.class);
+                Intent myIntent = new Intent(currentActivity, ShopNowActivity.class);
                 currentActivity.startActivity(myIntent);
             }
         });
