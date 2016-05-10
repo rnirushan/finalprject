@@ -141,7 +141,7 @@ public class ShopNowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(currentActivity, SubCategoryActivity.class);
-                myIntent.putExtra("categoryId",categoryList.get(6).getId());
+                myIntent.putExtra("categoryId",String.valueOf(categoryList.get(6).getId()));
                 currentActivity.startActivity(myIntent);
             }
         });
@@ -149,7 +149,7 @@ public class ShopNowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(currentActivity, SubCategoryActivity.class);
-                myIntent.putExtra("categoryId",categoryList.get(7).getId());
+                myIntent.putExtra("categoryId",String.valueOf(categoryList.get(7).getId()));
                 currentActivity.startActivity(myIntent);
             }
         });
@@ -157,7 +157,7 @@ public class ShopNowActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent myIntent = new Intent(currentActivity, SubCategoryActivity.class);
-                myIntent.putExtra("categoryId",categoryList.get(8).getId());
+                myIntent.putExtra("categoryId",String.valueOf(categoryList.get(8).getId()));
                 currentActivity.startActivity(myIntent);
             }
         });
