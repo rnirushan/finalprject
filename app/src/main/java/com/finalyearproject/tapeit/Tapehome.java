@@ -76,7 +76,7 @@ public class Tapehome extends AppCompatActivity implements SensorEventListener {
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if (event.getAction() == 0) {
-                            btnMeasure.setBackgroundColor(Color.parseColor("#9affde07"));
+                            btnMeasure.setBackgroundColor(Color.parseColor("#32ffde07"));
                             logging = false;
                             handleStartAndStop();
                         } else {

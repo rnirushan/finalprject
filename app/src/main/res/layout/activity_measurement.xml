@@ -79,14 +79,14 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:layout_below="@+id/txtMeasure"
+        android:layout_below="@+id/txtAlert"
         android:id="@+id/lLayoutMeasurement">
 
         <Button
             android:layout_width="0dp"
             android:layout_weight="10"
             android:layout_height="wrap_content"
-            android:text="START"
+            android:text="MEASURE"
             android:id="@+id/btnMeasurement"
             android:textColor="#000000"
             android:background="#ffde07"
@@ -103,7 +103,7 @@
             android:text="SAVE"
             android:id="@+id/btnSaveMeasurement"
             android:textColor="#000000"
-            android:background="#ffde07"
+            android:background="#3106b103"
             android:textSize="25sp"
             android:layout_marginLeft="10dp"/>
 

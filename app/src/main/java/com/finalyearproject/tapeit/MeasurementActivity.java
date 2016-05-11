@@ -1,5 +1,6 @@
 package com.finalyearproject.tapeit;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
 import android.hardware.Sensor;
@@ -14,6 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.finalyearproject.databasehelper.DatabaseHandler;
+import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.logic.DistanceTracker;
 import com.finalyearproject.logic.SingleData;
 
@@ -32,6 +35,8 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
     public Button btnSaveMeasure;
     public TextView txtAlert;
     private SensorManager sm;
+    private Measurement measurement;
+    private Activity currentActivity;
 
     static {
         distanceTracker = new DistanceTracker();
@@ -42,10 +47,13 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_measurement);
 
+        measurement = (Measurement)(getIntent().getParcelableExtra("MEASUREMENT"));
+
         this.initGuiComponant();
         this.bindComponantEvents();
         this.getSensors();
 
+        this.currentActivity = this;
         this.distance = 0.0f;
     }
 
@@ -68,7 +76,9 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
         this.btnSaveMeasure = (Button) findViewById(R.id.btnSaveMeasurement);
 
         this.txtMeasure.setTextSize(2, 60.0f);
-        this.txtMeasure.setText(distance + " cm");
+        this.txtMeasure.setText(String.format("%.1f cm", distance));
+
+        btnSaveMeasure.setEnabled(false);
     }
 
     private void bindComponantEvents() {
@@ -77,14 +87,22 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if (event.getAction() == 0) {
-                            btnMeasure.setBackgroundColor(Color.parseColor("#9affde07"));
+                            btnMeasure.setBackgroundColor(Color.parseColor("#32ffde07"));
                             logging = false;
                             handleStartAndStop();
                         } else {
-                            if (event.getAction() == INCH) {
+                            if (event.getAction() == 1) {
                                 btnMeasure.setBackgroundColor(Color.parseColor("#ffde07"));
                                 logging = true;
                                 handleStartAndStop();
+
+                                if (distance > 0) {
+                                    btnSaveMeasure.setBackgroundColor(Color.parseColor("#06b103"));
+                                    btnSaveMeasure.setEnabled(true);
+                                } else {
+                                    btnSaveMeasure.setBackgroundColor(Color.parseColor("#3106b103"));
+                                    btnSaveMeasure.setEnabled(false);
+                                }
                             }
                         }
                         return true;
@@ -92,16 +110,29 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
                 }
         );
 
-        btnSaveMeasure.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (distance > 0){
+        btnSaveMeasure.setOnTouchListener(
+                new View.OnTouchListener() {
+                    @Override
+                    public boolean onTouch(View v, MotionEvent event) {
+                        if (event.getAction() == 0) {
+                            btnSaveMeasure.setBackgroundColor(Color.parseColor("#3106b103"));
+                        } else {
+                            if (event.getAction() == 1) {
+                                btnSaveMeasure.setBackgroundColor(Color.parseColor("#3106b103"));
+                                btnSaveMeasure.setEnabled(false);
+                                btnSaveMeasure.setText("Saving...");
 
-                } else {
+                                DatabaseHandler db = new DatabaseHandler(currentActivity);
+                                measurement.setValue((distance*100) + "");
+                                db.updateMeasurement(measurement);
 
+                                currentActivity.finish();
+                            }
+                        }
+                        return true;
+                    }
                 }
-            }
-        });
+        );
     }
 
     @Override
@@ -156,7 +187,7 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
         this.sem = CM;
         this.measure_errors = "";
         this.logging = true;
-
+        this.distance = 0.0f;
         this.txtMeasure.setText("--");
     }
 
@@ -210,7 +241,7 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
             case 0:
                 break;
             case 1:
-                this.txtAlert.setTextColor(Color.parseColor("#07ff24"));
+                this.txtAlert.setTextColor(Color.parseColor("#06b103"));
                 this.txtAlert.setText(getString(R.string.highaccuracy));
                 break;
             case 2:

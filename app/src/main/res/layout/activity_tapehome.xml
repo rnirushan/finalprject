@@ -78,7 +78,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="START"
+        android:text="MEASURE"
         android:id="@+id/btnMeasure"
         android:layout_below="@+id/txtMeasure"
         android:layout_marginTop="53dp"

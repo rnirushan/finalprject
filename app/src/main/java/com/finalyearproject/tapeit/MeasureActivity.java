@@ -10,6 +10,7 @@ import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
+import com.finalyearproject.controllers.ShopController;
 import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.dto.SubCategory;
 import com.finalyearproject.measurementadapter.MeasurementAdapter;
@@ -22,7 +23,7 @@ public class MeasureActivity extends AppCompatActivity {
     public TextView txtMeasureTitle;
     public TextView txtMeasureCategory;
     public TextView txtMeasureDescription;
-
+    int subCatId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,7 +39,7 @@ public class MeasureActivity extends AppCompatActivity {
         String title = getIntent().getStringExtra("title");
         String category = getIntent().getStringExtra("category");
         String description = getIntent().getStringExtra("description");
-        ArrayList<Measurement> measurements = getIntent().getParcelableArrayListExtra("measuement");
+        subCatId = Integer.parseInt(getIntent().getStringExtra("SUB_CAT_ID"));
 
         if(title != null){
             txtMeasureDesTitle.setText("Description for " + title);
@@ -54,33 +55,21 @@ public class MeasureActivity extends AppCompatActivity {
         }
 
 
-        this.initGuiComponant(measurements);
-        this.bindComponantEvents();
+        this.initGuiComponant();
     }
 
-    private void initGuiComponant(ArrayList<Measurement> measurements) {
+    @Override
+    protected void onResume() {
+        super.onResume();
+        initGuiComponant();
+    }
 
-        String[] measurementArray = new String[measurements.size()];
-        int i = 0;
-
-        for(Measurement measurement:measurements){
-
-            measurementArray[i] = measurement.getTitle();
-            i++;
-
-        }
-        BaseAdapter adapter = new MeasurementAdapter(this, measurementArray);
+    private void initGuiComponant() {
+        ShopController controller = new ShopController(this);
+        ArrayList<Measurement> measurements = new ArrayList<Measurement>(controller.getMeasurements(subCatId));
+        BaseAdapter adapter = new MeasurementAdapter(this, measurements);
 
         measurementLstView = (ListView) findViewById(R.id.lstViewMeasure);
         measurementLstView.setAdapter(adapter);
-    }
-
-    private void bindComponantEvents() {
-        measurementLstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
-            }
-        });
     }
 }

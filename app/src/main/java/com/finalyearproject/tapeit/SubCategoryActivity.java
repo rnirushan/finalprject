@@ -66,13 +66,12 @@ public class SubCategoryActivity extends AppCompatActivity {
                 String subCategoryName = (String) parent.getItemAtPosition(position);
                 SubCategory subCategory = controller.getSubCategoryByName(subCategoryName);
                 Category category = controller.getCategoryById(subCategory.getCategoryId());
-                ArrayList<Measurement> measurementList = new ArrayList<Measurement>(controller.getMeasurements(subCategory.getId()));
 
                 Intent myIntent = new Intent(currentActivity, MeasureActivity.class);
                 myIntent.putExtra("title",subCategory.getTitle());
                 myIntent.putExtra("category",category.getName());
                 myIntent.putExtra("description",subCategory.getDescription());
-                myIntent.putParcelableArrayListExtra("measuement",measurementList);
+                myIntent.putExtra("SUB_CAT_ID", subCategory.getId() + "");
                 currentActivity.startActivity(myIntent);
             }
         });
