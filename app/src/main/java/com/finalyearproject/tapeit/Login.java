@@ -122,7 +122,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void onLoginFailed() {
-        Toast.makeText(getBaseContext(), "Login failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), "Username or Password is incorrect. TRY AGAIN", Toast.LENGTH_LONG).show();
 
         _loginButton.setEnabled(true);
     }

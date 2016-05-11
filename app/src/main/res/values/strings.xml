@@ -1,12 +1,12 @@
 <resources>
     <string name="app_name">TapeIT</string>
     <string name="green">Green</string>
-    <string name="highrotation">high rotation</string>
+    <string name="highrotation">HIGH ROTATION while sliding</string>
     <string name="howto">how to use it</string>
-    <string name="toofastorvertical">too fast or vertical</string>
-    <string name="stoptooearly">stop too early</string>
-    <string name="starttooearly">start too early</string>
-    <string name="lowspeed">low speed</string>
+    <string name="toofastorvertical">TOO FAST or VERTICAL</string>
+    <string name="stoptooearly">WAIT FOR 1 SECOND before you release the measure button at the end of the movement</string>
+    <string name="starttooearly">Press the measure button and WAIT FOR 1 SECOND before you start sliding</string>
+    <string name="lowspeed">Do not slide TOO SLOWLY</string>
     <string name="highaccuracy">Accuracy : HIGH</string>
     <string name="mediumaccuracy">Accuracy : Medium</string>
     <string name="lowaccuracy">Accuracy : LOW</string>
