@@ -13,7 +13,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/txtMeasureDesTitle"
-        android:text="Description for Peplum"
         android:textSize="20dp"
         android:textColor="#1e016c"
         android:textStyle="bold"/>
@@ -38,7 +37,6 @@
         android:layout_marginTop="20dp"
         android:layout_marginLeft="53dp"
         android:textSize="16dp"
-        android:text="Peplum"
         android:textColor="#07001a"/>
 
     <TextView
@@ -61,7 +59,6 @@
         android:layout_marginTop="10dp"
         android:layout_marginLeft="20dp"
         android:textSize="16dp"
-        android:text="Tops"
         android:textColor="#07001a"/>
 
     <TextView

@@ -42,4 +42,16 @@ public class ShopController {
 
     }
 
+    public Category getCategoryById(int id){
+
+        return databaseHandler.getCategoryById(id);
+
+    }
+
+    public SubCategory getSubCategoryByName(String name){
+
+        return databaseHandler.getSubCategoryByName(name);
+
+    }
+
 }

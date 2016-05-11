@@ -11,21 +11,25 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import com.finalyearproject.controllers.ShopController;
+import com.finalyearproject.dto.Category;
+import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.dto.SubCategory;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
 public class SubCategoryActivity extends AppCompatActivity {
     public Activity currentActivity;
     private ListView subCategoryLstView;
-
+    Context context;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sub_category);
 
         currentActivity = this;
+        context =this;
 
         int categoryId = Integer.parseInt(getIntent().getStringExtra("categoryId"));
         ShopController controller = new ShopController(this);
@@ -58,7 +62,17 @@ public class SubCategoryActivity extends AppCompatActivity {
         subCategoryLstView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                ShopController controller = new ShopController(context);
+                String subCategoryName = (String) parent.getItemAtPosition(position);
+                SubCategory subCategory = controller.getSubCategoryByName(subCategoryName);
+                Category category = controller.getCategoryById(subCategory.getCategoryId());
+                ArrayList<Measurement> measurementList = new ArrayList<Measurement>(controller.getMeasurements(subCategory.getId()));
+
                 Intent myIntent = new Intent(currentActivity, MeasureActivity.class);
+                myIntent.putExtra("title",subCategory.getTitle());
+                myIntent.putExtra("category",category.getName());
+                myIntent.putExtra("description",subCategory.getDescription());
+                myIntent.putParcelableArrayListExtra("measuement",measurementList);
                 currentActivity.startActivity(myIntent);
             }
         });

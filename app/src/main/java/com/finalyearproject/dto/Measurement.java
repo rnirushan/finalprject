@@ -1,6 +1,11 @@
 package com.finalyearproject.dto;
 
-public class Measurement {
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import java.util.ArrayList;
+
+public class Measurement implements Parcelable {
 
     private int id;
 
@@ -23,6 +28,13 @@ public class Measurement {
         this.subcategoryId = subcategoryId;
         this.title =title;
 
+    }
+
+    public Measurement(Parcel in){
+        this.id = in.readInt();
+        this.subcategoryId = in.readInt();
+        this.title = in.readString();
+        this.value = in.readString();
     }
 
     public int getId() {
@@ -55,5 +67,34 @@ public class Measurement {
 
     public void setValue(String value) {
         this.value = value;
+    }
+
+    public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
+        public Measurement createFromParcel(Parcel in) {
+            return new Measurement(in);
+        }
+
+        public Measurement[] newArray(int size) {
+            return new Measurement[size];
+        }
+
+        public ArrayList<Measurement> newArrayList(){
+            return new ArrayList<Measurement>();
+        }
+    };
+
+
+    @Override
+    public int describeContents() {
+        return this.hashCode();
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeInt(subcategoryId);
+        dest.writeString(title);
+        dest.writeString(value);
+
     }
 }
