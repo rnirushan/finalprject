@@ -47,8 +47,8 @@ public class SignUpActivity extends AppCompatActivity {
         lnkLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // Finish the registration screen and return to the Login activity
-                Intent intent = new Intent(getApplicationContext(), Login.class);
+                // Finish the registration screen and return to the LoginActivity activity
+                Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
                 startActivityForResult(intent, REQUEST_SIGNIN);
             }
         });
@@ -97,7 +97,7 @@ public class SignUpActivity extends AppCompatActivity {
     public void onSignupSuccess() {
         btnSignup.setEnabled(true);
         setResult(RESULT_OK, null);
-        Intent intent = new Intent(getApplicationContext(), Login.class);
+        Intent intent = new Intent(getApplicationContext(), LoginActivity.class);
         startActivityForResult(intent, REQUEST_SIGNIN);
         finish();
     }

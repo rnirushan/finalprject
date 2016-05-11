@@ -9,7 +9,7 @@ import android.widget.ImageButton;
 
 import com.finalyearproject.util.DBDataGenerator;
 
-public class home extends AppCompatActivity {
+public class HomeActivity extends AppCompatActivity {
 
     public ImageButton imgMeasureNow;
     public ImageButton imgShopNow;
@@ -39,7 +39,7 @@ public class home extends AppCompatActivity {
         imgMeasureNow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent myIntent = new Intent(currentActivity, Tapehome.class);
+                Intent myIntent = new Intent(currentActivity, TapeHomeActivity.class);
                 currentActivity.startActivity(myIntent);
             }
         });

@@ -18,7 +18,7 @@ import com.finalyearproject.logic.DistanceTracker;
 import com.finalyearproject.logic.SingleData;
 import com.finalyearproject.tapeit.R;
 
-public class Tapehome extends AppCompatActivity implements SensorEventListener {
+public class TapeHomeActivity extends AppCompatActivity implements SensorEventListener {
     public static DistanceTracker distanceTracker;
     private Sensor Acc;
     private static final int INCH = 1;

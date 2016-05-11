@@ -14,9 +14,8 @@ import android.widget.Toast;
 
 import com.finalyearproject.controllers.UserController;
 import com.finalyearproject.dto.User;
-import com.finalyearproject.tapeit.R;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
     private static final String TAG = "LoginActivity";
     private static final int REQUEST_SIGNUP = 0;
 
@@ -54,7 +53,7 @@ public class Login extends AppCompatActivity {
     }
 
     public void login() {
-        Log.d(TAG, "Login");
+        Log.d(TAG, "LoginActivity");
 
         if (!validate()) {
             onLoginFailed();
@@ -116,7 +115,7 @@ public class Login extends AppCompatActivity {
 
     public void onLoginSuccess() {
         _loginButton.setEnabled(true);
-        Intent myIntent = new Intent(this, home.class);
+        Intent myIntent = new Intent(this, HomeActivity.class);
         this.startActivity(myIntent);
         finish();
     }

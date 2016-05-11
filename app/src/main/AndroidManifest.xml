@@ -14,10 +14,10 @@
         android:largeHeap="true"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Tapehome" />
-        <activity android:name=".home" />
+        <activity android:name=".TapeHomeActivity" />
+        <activity android:name=".HomeActivity" />
         <activity android:name=".ShopNowActivity" />
-        <activity android:name=".Login">
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -96,7 +96,7 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
                                 logging = true;
                                 handleStartAndStop();
 
-                                if (distance > 0) {
+                                if ((distance*100) > 0) {
                                     btnSaveMeasure.setBackgroundColor(Color.parseColor("#06b103"));
                                     btnSaveMeasure.setEnabled(true);
                                 } else {
