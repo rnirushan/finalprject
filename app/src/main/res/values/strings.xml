@@ -1,0 +1,29 @@
+<resources>
+    <string name="app_name">TapeIT</string>
+    <string name="green">Green</string>
+    <string name="highrotation">HIGH ROTATION while sliding</string>
+    <string name="howto">how to use it</string>
+    <string name="toofastorvertical">TOO FAST or VERTICAL</string>
+    <string name="stoptooearly">WAIT FOR 1 SECOND before you release the measure button at the end of the movement</string>
+    <string name="starttooearly">Press the measure button and WAIT FOR 1 SECOND before you start sliding</string>
+    <string name="lowspeed">Do not slide TOO SLOWLY</string>
+    <string name="highaccuracy">Accuracy : HIGH</string>
+    <string name="mediumaccuracy">Accuracy : Medium</string>
+    <string name="lowaccuracy">Accuracy : LOW</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_sign_up">Sign Up</string>
+    <string name="sub_category_title">Sub Categories</string>
+</resources>

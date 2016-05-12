@@ -1,0 +1,72 @@
+package com.finalyearproject.logic;
+
+public class SingleData {
+    public float ax;
+    public float ax_raw;
+    public float ay;
+    public float ay_raw;
+    public float az;
+    public float az_raw;
+    public boolean fake;
+    public float g;
+    public float g_raw;
+    public float s;
+    public boolean start;
+    public boolean stop;
+    public boolean stst_t;
+    public boolean stst_t2;
+    public boolean stst_t3;
+    public float sx;
+    public float sy;
+    public float sz;
+    public long timeNano;
+    public float timeSec;
+    public float varg;
+    public float varx;
+    public float vary;
+    public float varz;
+    public float vg;
+    public float vx;
+    public float vy;
+    public float vz;
+
+    public SingleData(float x, float y, float z, long t) {
+        this.timeNano = 0;
+        this.timeSec = 0.0f;
+        this.ax_raw = 0.0f;
+        this.ay_raw = 0.0f;
+        this.az_raw = 0.0f;
+        this.g_raw = 0.0f;
+        this.ax = 0.0f;
+        this.ay = 0.0f;
+        this.az = 0.0f;
+        this.g = 0.0f;
+        this.vx = 0.0f;
+        this.vy = 0.0f;
+        this.vz = 0.0f;
+        this.vg = 0.0f;
+        this.sx = 0.0f;
+        this.sy = 0.0f;
+        this.sz = 0.0f;
+        this.s = 0.0f;
+        this.varx = 0.0f;
+        this.vary = 0.0f;
+        this.varz = 0.0f;
+        this.varg = 0.0f;
+        this.start = false;
+        this.stop = false;
+        this.stst_t = false;
+        this.stst_t2 = false;
+        this.stst_t3 = false;
+        this.fake = true;
+        this.ax = x;
+        this.ay = y;
+        this.az = z;
+        this.timeNano = t;
+        this.ax_raw = x;
+        this.ay_raw = y;
+        this.az_raw = z;
+        this.g_raw = (float) Math.sqrt((Math.pow((double) this.ax, 2.0d) + Math.pow((double) this.ay, 2.0d)) + Math.pow((double) this.az, 2.0d));
+        this.g = (float) Math.sqrt((Math.pow((double) this.ax, 2.0d) + Math.pow((double) this.ay, 2.0d)) + Math.pow((double) this.az, 2.0d));
+    }
+}
