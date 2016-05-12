@@ -1,19 +1,14 @@
 package com.finalyearproject.tapeit;
 
-import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import com.finalyearproject.controllers.ShopController;
 import com.finalyearproject.dto.Measurement;
-import com.finalyearproject.dto.SubCategory;
-import com.finalyearproject.measurementadapter.MeasurementAdapter;
+import com.finalyearproject.adapters.MeasurementAdapter;
 
 import java.util.ArrayList;
 

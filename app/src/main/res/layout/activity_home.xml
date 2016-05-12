@@ -7,7 +7,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.example.miriam.tapeit.home">
+    tools:context="com.finalyearproject.tapeit.HomeActivity">
 
     <FrameLayout
         android:layout_width="match_parent"
@@ -17,14 +17,6 @@
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true">
-
-        <ImageView
-            android:layout_width="353dp"
-            android:layout_height="wrap_content"
-            android:id="@+id/imageView"
-            android:src="@drawable/hometabtop"
-            android:layout_gravity="center_horizontal"
-            android:adjustViewBounds="true"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -59,6 +51,14 @@
             android:layout_marginLeft="15dp"
             android:layout_marginRight="15dp"
             android:background="@drawable/button_shop" />
+
+        <ImageView
+            android:layout_width="312dp"
+            android:layout_height="115dp"
+            android:id="@+id/imageView"
+            android:src="@drawable/hometabtop"
+            android:layout_gravity="center_horizontal|top"
+            android:adjustViewBounds="true"/>
 
     </FrameLayout>
 </RelativeLayout>

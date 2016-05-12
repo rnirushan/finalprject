@@ -12,7 +12,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="1) Press the start button and move quickly to the left to the end point of where you would like to measure "
+        android:text="1) Press the measure button wait for 1 second and move quickly to the left to the end point of where you would like to measure "
         android:layout_alignParentRight="true"
         android:layout_alignParentEnd="true"
         android:paddingLeft="5dp"
@@ -24,7 +24,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="2) When end point is reached release the button and wait for the measurement "
+        android:text="2) When end point is reached wait for 1 second and release the button and wait for the measurement "
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="10dp"
@@ -34,25 +34,13 @@
         android:layout_alignParentStart="true"
         android:textSize="14dp" />
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Tip: Do not move to slowly or your accuracy will  be comprimised"
-        android:paddingLeft="5dp"
-        android:paddingRight="5dp"
-        android:paddingTop="10dp"
-        android:id="@+id/textView3"
-        android:layout_below="@+id/textView"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:textSize="14dp" />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingTop="15dp"
+        android:paddingTop="5dp"
         android:id="@+id/txtMeasure"
         android:textSize="65dp"
         android:layout_centerVertical="true"
@@ -67,7 +55,7 @@
         android:text=""
         android:paddingLeft="15dp"
         android:paddingRight="15dp"
-        android:paddingTop="130dp"
+        android:paddingTop="120dp"
         android:id="@+id/txtAlert"
         android:layout_centerVertical="true"
         android:layout_centerHorizontal="true"
@@ -103,7 +91,7 @@
             android:text="SAVE"
             android:id="@+id/btnSaveMeasurement"
             android:textColor="#000000"
-            android:background="#3106b103"
+            android:background="#d3d3d3"
             android:textSize="25sp"
             android:layout_marginLeft="10dp"/>
 
@@ -112,7 +100,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="To measure again, press the start button"
+        android:text="To measure again, press the measure button"
         android:paddingLeft="5dp"
         android:paddingRight="5dp"
         android:paddingTop="10dp"

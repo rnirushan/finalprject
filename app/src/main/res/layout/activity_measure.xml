@@ -14,7 +14,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/txtMeasureDesTitle"
         android:textSize="20dp"
-        android:textColor="#1e016c"
+        android:textColor="#3366BB"
         android:textStyle="bold"/>
 
     <TextView
@@ -25,7 +25,7 @@
         android:textSize="16dp"
         android:text="Title"
         android:id="@+id/txtMeasureTitleLbl"
-        android:textColor="#1e016c"
+        android:textColor="#3366BB"
         android:textStyle="bold"/>
 
     <TextView
@@ -47,7 +47,7 @@
         android:textSize="16dp"
         android:text="Category"
         android:id="@+id/txtMeasureCategoryLbl"
-        android:textColor="#1e016c"
+        android:textColor="#3366BB"
         android:textStyle="bold"/>
 
     <TextView
@@ -69,7 +69,7 @@
         android:textSize="16dp"
         android:text="Description"
         android:id="@+id/txtMeasureDescriptionLbl"
-        android:textColor="#1e016c"
+        android:textColor="#3366BB"
         android:textStyle="bold"/>
     
     <ScrollView
@@ -95,7 +95,7 @@
         android:textSize="16dp"
         android:text="Recommended Measurement"
         android:id="@+id/txtlstViewMeasureLbl"
-        android:textColor="#1e016c"
+        android:textColor="#3366BB"
         android:textStyle="bold"/>
 
     <ListView

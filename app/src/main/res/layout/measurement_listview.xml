@@ -16,8 +16,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="18dp"
-            android:layout_marginLeft="20dp"
-            android:textColor="#1e016c"
+            android:layout_marginLeft="0dp"
+            android:textColor="#3366BB"
             android:text="TextView" />
 
         <TextView
@@ -26,7 +26,7 @@
             android:layout_height="wrap_content"
             android:textSize="15dp"
             android:layout_marginTop="5dp"
-            android:layout_marginLeft="20dp"
+            android:layout_marginLeft="0dp"
             android:textColor="#000000"
             android:text="Measure : 25 cm" />
 
@@ -36,7 +36,7 @@
         android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_weight="1"
-        android:layout_marginRight="20dp"
+        android:layout_marginRight="10dp"
         android:layout_marginTop="10dp"
         android:layout_marginBottom="10dp"
         android:text="Measure"

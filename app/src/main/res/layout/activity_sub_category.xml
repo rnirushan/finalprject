@@ -14,7 +14,7 @@
     android:text="@string/sub_category_title"
     android:textSize="30dp"
     android:id="@+id/txtSubCategoryTitle"
-    android:textColor="#1e016c" />
+    android:textColor="#3366BB" />
     <ListView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

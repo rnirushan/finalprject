@@ -1,4 +1,4 @@
-package com.finalyearproject.measurementadapter;
+package com.finalyearproject.adapters;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,13 +11,10 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.finalyearproject.dto.Measurement;
-import com.finalyearproject.tapeit.MeasureActivity;
 import com.finalyearproject.tapeit.MeasurementActivity;
 import com.finalyearproject.tapeit.R;
-import com.finalyearproject.tapeit.ShopNowActivity;
 
 import java.util.List;
 
@@ -68,7 +65,9 @@ public class MeasurementAdapter extends BaseAdapter {
 
         if(measurements.get(position).getValue() != null && measurements.get(position).getValue() != "" &&
                 Double.parseDouble(measurements.get(position).getValue()) > 0.0){
-            holder.txtMeasurement.setText("Measurement : " + measurements.get(position).getValue() + " cm");
+            holder.txtMeasurement.setText("Measurement : " +
+                    String.format("%.2f", Double.parseDouble(measurements.get(position).getValue())) + " cm");
+
         } else {
             holder.txtMeasurement.setText("-");
         }

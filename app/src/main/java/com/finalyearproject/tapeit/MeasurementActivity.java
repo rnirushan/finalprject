@@ -97,10 +97,12 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
                                 handleStartAndStop();
 
                                 if ((distance*100) > 0) {
-                                    btnSaveMeasure.setBackgroundColor(Color.parseColor("#06b103"));
+                                    btnSaveMeasure.setBackgroundColor(Color.parseColor("#3366BB"));
+                                    btnSaveMeasure.setTextColor(Color.parseColor("#ffffff"));
                                     btnSaveMeasure.setEnabled(true);
                                 } else {
-                                    btnSaveMeasure.setBackgroundColor(Color.parseColor("#3106b103"));
+                                    btnSaveMeasure.setBackgroundColor(Color.parseColor("#d3d3d3"));
+                                    btnSaveMeasure.setTextColor(Color.parseColor("#000000"));
                                     btnSaveMeasure.setEnabled(false);
                                 }
                             }
@@ -115,10 +117,11 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
                     @Override
                     public boolean onTouch(View v, MotionEvent event) {
                         if (event.getAction() == 0) {
-                            btnSaveMeasure.setBackgroundColor(Color.parseColor("#3106b103"));
+                            btnSaveMeasure.setBackgroundColor(Color.parseColor("#3366BB"));
                         } else {
                             if (event.getAction() == 1) {
-                                btnSaveMeasure.setBackgroundColor(Color.parseColor("#3106b103"));
+                                btnSaveMeasure.setBackgroundColor(Color.parseColor("#3366BB"));
+                                btnSaveMeasure.setTextColor(Color.parseColor("#ffffff"));
                                 btnSaveMeasure.setEnabled(false);
                                 btnSaveMeasure.setText("Saving...");
 
