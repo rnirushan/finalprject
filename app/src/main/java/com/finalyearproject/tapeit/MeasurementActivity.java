@@ -15,7 +15,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.finalyearproject.controllers.ShopController;
 import com.finalyearproject.databasehelper.DatabaseHandler;
+import com.finalyearproject.dto.MeasuredValues;
 import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.logic.DistanceTracker;
 import com.finalyearproject.logic.SingleData;
@@ -36,6 +38,7 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
     public TextView txtAlert;
     private SensorManager sm;
     private Measurement measurement;
+    private MeasuredValues measuredValues;
     private Activity currentActivity;
 
     static {
@@ -48,13 +51,16 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
         setContentView(R.layout.activity_measurement);
 
         measurement = (Measurement)(getIntent().getParcelableExtra("MEASUREMENT"));
+        this.currentActivity = this;
+        this.distance = 0.0f;
 
         this.initGuiComponant();
         this.bindComponantEvents();
         this.getSensors();
 
-        this.currentActivity = this;
-        this.distance = 0.0f;
+
+
+
     }
 
     private void getSensors() {
@@ -126,8 +132,14 @@ public class MeasurementActivity extends AppCompatActivity implements SensorEven
                                 btnSaveMeasure.setText("Saving...");
 
                                 DatabaseHandler db = new DatabaseHandler(currentActivity);
-                                measurement.setValue((distance*100) + "");
-                                db.updateMeasurement(measurement);
+                                MeasuredValues measuredValues = db.getMeasuredValue(measurement.getId());
+                                if(measuredValues == null){
+                                    db.addMeasuredValues(new MeasuredValues(measurement.getId(),DatabaseHandler.loggedinUserId,
+                                            (distance*100) + "" ));
+                                }else{
+                                    measuredValues.setValue((distance*100) + "");
+                                    db.updateMeasuredValues(measuredValues);
+                                }
 
                                 currentActivity.finish();
                             }

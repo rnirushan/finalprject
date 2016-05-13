@@ -12,6 +12,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
+import com.finalyearproject.controllers.ShopController;
+import com.finalyearproject.dto.MeasuredValues;
 import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.tapeit.MeasurementActivity;
 import com.finalyearproject.tapeit.R;
@@ -63,10 +65,13 @@ public class MeasurementAdapter extends BaseAdapter {
 
         holder.txtTitle.setText(measurements.get(position).getTitle());
 
-        if(measurements.get(position).getValue() != null && measurements.get(position).getValue() != "" &&
-                Double.parseDouble(measurements.get(position).getValue()) > 0.0){
+        ShopController controller = new ShopController(context);
+        MeasuredValues measuredValues = controller.getMeasuredValue(measurements.get(position).getId());
+
+        if(measuredValues != null && measuredValues.getValue() != null && measuredValues.getValue() != "" &&
+                Double.parseDouble(measuredValues.getValue()) > 0.0){
             holder.txtMeasurement.setText("Measurement : " +
-                    String.format("%.2f", Double.parseDouble(measurements.get(position).getValue())) + " cm");
+                    String.format("%.2f", Double.parseDouble(measuredValues.getValue())) + " cm");
 
         } else {
             holder.txtMeasurement.setText("-");

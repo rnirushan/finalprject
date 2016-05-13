@@ -10,12 +10,15 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
 import com.finalyearproject.dto.Category;
+import com.finalyearproject.dto.MeasuredValues;
 import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.dto.SubCategory;
 import com.finalyearproject.dto.User;
 import com.finalyearproject.util.DBDataGenerator;
 
 public class DatabaseHandler extends SQLiteOpenHelper {
+
+    public static int loggedinUserId;
 
     Context context;
 
@@ -30,6 +33,8 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String TABLE_CATEGORIES = "categories";
     private static final String TABLE_SUBCATEGORIES = "subcategories";
     private static final String TABLE_MEASUREMENTS = "measurements";
+    private static final String TABLE_MEASUREDVALUES = "measuredvalues";
+
 
     private static final String USER_KEY_ID = "id";
     private static final String USER_KEY_NAME = "name";
@@ -48,7 +53,12 @@ public class DatabaseHandler extends SQLiteOpenHelper {
     private static final String MEASUREMENT_KEY_ID = "id";
     private static final String MEASUREMENT_KEY_SUBCATEGORY_ID = "subcategoryid";
     private static final String MEASUREMENT_KEY_TITLE = "title";
-    private static final String MEASUREMENT_KEY_VALUE = "value";
+
+    private static final String MEASUREDVALUES_KEY_ID = "id";
+    private static final String MEASUREDVALUES_KEY_MEASUREMENT_ID = "measurementid";
+    private static final String MEASUREDVALUES_KEY_USER_ID = "userid";
+    private static final String MEASUREDVALUES_KEY_VALUE = "value";
+
 
     public DatabaseHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -76,13 +86,17 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
         String CREATE_MEASUREMENTS_TABLE = "CREATE TABLE " + TABLE_MEASUREMENTS + "("
                 + MEASUREMENT_KEY_ID + " INTEGER PRIMARY KEY," + MEASUREMENT_KEY_SUBCATEGORY_ID
-                + " INTEGER," + MEASUREMENT_KEY_TITLE + " TEXT," +
-                MEASUREMENT_KEY_VALUE + " TEXT" + ")";
+                + " INTEGER," + MEASUREMENT_KEY_TITLE + " TEXT" + ")";
+
+        String CREATE_MEASUREDVALUES_TABLE = "CREATE TABLE " + TABLE_MEASUREDVALUES + "("
+                + MEASUREDVALUES_KEY_ID + " INTEGER PRIMARY KEY," + MEASUREDVALUES_KEY_MEASUREMENT_ID
+                + " INTEGER," + MEASUREDVALUES_KEY_USER_ID + " INTEGER," + MEASUREDVALUES_KEY_VALUE + " TEXT" + ")";
 
         db.execSQL(CREATE_USERS_TABLE);
         db.execSQL(CREATE_CATEGORIES_TABLE);
         db.execSQL(CREATE_SUBCATEGORIES_TABLE);
         db.execSQL(CREATE_MEASUREMENTS_TABLE);
+        db.execSQL(CREATE_MEASUREDVALUES_TABLE);
 
 
     }
@@ -129,6 +143,23 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         return user;
     }
 
+    public boolean isEmailDuplicated(String email){
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_USERS, new String[] { USER_KEY_ID,
+                        USER_KEY_NAME, USER_KEY_EMAIL, USER_KEY_PASSWORD}, USER_KEY_EMAIL + "=?",
+                new String[] { email }, null, null, null, null);
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        if(cursor.getCount()>0){
+            return true;
+        }else{
+            return false;
+        }
+
+    }
+
     public List<User> getAllUsers() {
         List<User> userList = new ArrayList<User>();
         // Select All Query
@@ -141,7 +172,7 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 User user = new User(cursor.getString(1), cursor.getString(2),
-                        cursor.getString(3));
+                cursor.getString(3));
 
                 user.setId(Integer.parseInt(cursor.getString(0)));
 
@@ -359,7 +390,6 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.put(MEASUREMENT_KEY_SUBCATEGORY_ID, measurement.getSubcategoryId());
         values.put(MEASUREMENT_KEY_TITLE, measurement.getTitle());
-        values.put(MEASUREMENT_KEY_VALUE, measurement.getValue());
 
         // Inserting Row
         db.insert(TABLE_MEASUREMENTS, null, values);
@@ -374,14 +404,14 @@ public class DatabaseHandler extends SQLiteOpenHelper {
         SQLiteDatabase db = this.getReadableDatabase();
 
         Cursor cursor = db.query(TABLE_MEASUREMENTS, new String[] { MEASUREMENT_KEY_ID,
-                        MEASUREMENT_KEY_SUBCATEGORY_ID, MEASUREMENT_KEY_TITLE,
-                        MEASUREMENT_KEY_VALUE}, MEASUREMENT_KEY_SUBCATEGORY_ID + "=?",
+                        MEASUREMENT_KEY_SUBCATEGORY_ID, MEASUREMENT_KEY_TITLE},
+                MEASUREMENT_KEY_SUBCATEGORY_ID + "=?",
                 new String[] { String.valueOf(subCategoryId) }, null, null, null, null);
 
         if (cursor.moveToFirst()) {
             do {
                 Measurement measurement = new Measurement( Integer.parseInt(cursor.getString(1)),
-                        cursor.getString(2), cursor.getString(3));
+                        cursor.getString(2));
 
                 measurement.setId(Integer.parseInt(cursor.getString(0)));
 
@@ -393,17 +423,55 @@ public class DatabaseHandler extends SQLiteOpenHelper {
 
     }
 
-    public int updateMeasurement(Measurement measurement){
+    public int updateMeasuredValues(MeasuredValues measuredValues){
 
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(MEASUREMENT_KEY_VALUE, measurement.getValue());
+        values.put(MEASUREDVALUES_KEY_VALUE, measuredValues.getValue());
 
         // updating row
-        return db.update(TABLE_MEASUREMENTS, values, MEASUREMENT_KEY_ID + " = ?",
-                new String[] { String.valueOf(measurement.getId()) });
+        return db.update(TABLE_MEASUREDVALUES, values, MEASUREDVALUES_KEY_ID + " = ?",
+                new String[] { String.valueOf(measuredValues.getId()) });
 
+    }
+    //i this returned null then no existing measured value for currently loggedin user
+    //so we need to create one entry
+    public MeasuredValues getMeasuredValue(int measurementId){
+
+        SQLiteDatabase db = this.getReadableDatabase();
+
+        Cursor cursor = db.query(TABLE_MEASUREDVALUES, new String[] { MEASUREDVALUES_KEY_ID,
+                        MEASUREDVALUES_KEY_MEASUREMENT_ID, MEASUREDVALUES_KEY_USER_ID,
+                        MEASUREDVALUES_KEY_VALUE},
+                MEASUREDVALUES_KEY_USER_ID + "=? AND " + MEASUREDVALUES_KEY_MEASUREMENT_ID + "=? ",
+                new String[] { String.valueOf(loggedinUserId),String.valueOf(measurementId) }, null, null, null, null);
+
+        if (cursor != null)
+            cursor.moveToFirst();
+
+        if(cursor.getCount()>0){
+            MeasuredValues measuredValues = new MeasuredValues(Integer.parseInt(cursor.getString(0)),
+                    Integer.parseInt(cursor.getString(1)),Integer.parseInt(cursor.getString(2)),cursor.getString(3));
+
+            return measuredValues;
+        }else{
+            return null;
+        }
+
+    }
+
+    public void addMeasuredValues (MeasuredValues measuredValues){
+        SQLiteDatabase db = this.getWritableDatabase();
+
+        ContentValues values = new ContentValues();
+        values.put(MEASUREDVALUES_KEY_MEASUREMENT_ID, measuredValues.getMeasurementId());
+        values.put(MEASUREDVALUES_KEY_USER_ID, measuredValues.getUserId());
+        values.put(MEASUREDVALUES_KEY_VALUE, measuredValues.getValue());
+
+        // Inserting Row
+        db.insert(TABLE_MEASUREDVALUES, null, values);
+        db.close(); // Closing database connection
     }
 
 

@@ -25,10 +25,15 @@ public class UserController {
         List<User> userList = databaseHandler.getAllUsers();
         for(User userFromDB:userList){
             if(user.equals(userFromDB)){
+                DatabaseHandler.loggedinUserId = userFromDB.getId();
                 return true;
             }
         }
         return  false;
+    }
+
+    public boolean isEmailDuplicated(String email){
+        return databaseHandler.isEmailDuplicated(email);
     }
 
 }

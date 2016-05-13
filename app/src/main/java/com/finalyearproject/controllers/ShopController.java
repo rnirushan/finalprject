@@ -5,6 +5,7 @@ import android.content.Context;
 
 import com.finalyearproject.databasehelper.DatabaseHandler;
 import com.finalyearproject.dto.Category;
+import com.finalyearproject.dto.MeasuredValues;
 import com.finalyearproject.dto.Measurement;
 import com.finalyearproject.dto.SubCategory;
 
@@ -52,6 +53,10 @@ public class ShopController {
 
         return databaseHandler.getSubCategoryByName(name);
 
+    }
+
+    public MeasuredValues getMeasuredValue (int measurementId){
+        return databaseHandler.getMeasuredValue(measurementId);
     }
 
 }

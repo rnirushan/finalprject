@@ -13,16 +13,6 @@ public class Measurement implements Parcelable {
 
     private String title;
 
-    private String value;
-
-    public Measurement(int subcategoryId, String title, String value){
-
-        this.subcategoryId = subcategoryId;
-        this.title = title;
-        this.value = value;
-
-    }
-
     public Measurement(int subcategoryId, String title){
 
         this.subcategoryId = subcategoryId;
@@ -34,7 +24,6 @@ public class Measurement implements Parcelable {
         this.id = in.readInt();
         this.subcategoryId = in.readInt();
         this.title = in.readString();
-        this.value = in.readString();
     }
 
     public int getId() {
@@ -61,13 +50,6 @@ public class Measurement implements Parcelable {
         this.title = title;
     }
 
-    public String getValue() {
-        return value;
-    }
-
-    public void setValue(String value) {
-        this.value = value;
-    }
 
     public static final Parcelable.Creator CREATOR = new Parcelable.Creator() {
         public Measurement createFromParcel(Parcel in) {
@@ -94,7 +76,6 @@ public class Measurement implements Parcelable {
         dest.writeInt(id);
         dest.writeInt(subcategoryId);
         dest.writeString(title);
-        dest.writeString(value);
 
     }
 }

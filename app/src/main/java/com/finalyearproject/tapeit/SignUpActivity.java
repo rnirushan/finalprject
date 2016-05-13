@@ -25,6 +25,10 @@ public class SignUpActivity extends AppCompatActivity {
     public Button btnSignup;
     public TextView lnkLogin;
 
+    public String signUpError = "Registration failed";
+
+    public UserController controller;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,6 +40,8 @@ public class SignUpActivity extends AppCompatActivity {
         txtConfirmPassword = (EditText) findViewById(R.id.txtConfirmPassword);
         btnSignup = (Button) findViewById(R.id.btnSignup);
         lnkLogin = (TextView) findViewById(R.id.lnkLogin);
+
+        controller = new UserController(this);
 
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,12 +91,11 @@ public class SignUpActivity extends AppCompatActivity {
                 }, 3000);
     }
 
+
     private void addUser(){
         String name = txtName.getText().toString();
         String email = txtEmail.getText().toString();
         String password = txtPassword.getText().toString();
-
-        UserController controller = new UserController(this);
         controller.registerUser(new User(name, email, password));
     }
 
@@ -103,7 +108,7 @@ public class SignUpActivity extends AppCompatActivity {
     }
 
     public void onSignupFailed() {
-        Toast.makeText(getBaseContext(), "Registration failed", Toast.LENGTH_LONG).show();
+        Toast.makeText(getBaseContext(), signUpError, Toast.LENGTH_LONG).show();
 
         btnSignup.setEnabled(true);
     }
@@ -135,6 +140,11 @@ public class SignUpActivity extends AppCompatActivity {
             valid = false;
         } else {
             txtPassword.setError(null);
+        }
+
+        if(controller.isEmailDuplicated(email)){
+            valid = false;
+            signUpError = "Registration failed due to your email is already registered";
         }
 
         if(!password.equals(confirmPassword)){
